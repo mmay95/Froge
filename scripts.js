@@ -34,7 +34,7 @@ function init() {
   //frog
   const frogClass = 'frog'
   const frogStartPosition = 94
-  let frogCurrentPosition = 0
+  let frogCurrentPosition = 94
   // //car
   // const carClass = 'car'
   // let carStart = 0
