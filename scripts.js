@@ -27,26 +27,35 @@ function init() {
   //Elements 
   // .grid 
   const grid = document.querySelector('.grid')
-  const size = 10
-  const cellCount = size * size
+  const width = 10
+  const cellCount = width * width
   const cells = []
 
   //frog
   const frogClass = 'frog'
-  let frogStart = 94
-  let frogPosition = 0
+  const frogStartPosition = 94
+  let frogCurrentPosition = 0
+  // //car
+  // const carClass = 'car'
+  // let carStart = 0
+  // let carPosition = 0
+  // //log
+  // const logClass = 'log'
+  // let logStart = 0
+  // let logPosition = 0
 
-  //car
-  const carClass = 'car'
-  let carStart = 0
-  let carPosition = 0
-
-  //log
-
-  const logClass = 'log'
-  let logStart = 0
-  let logPosition = 0
-
+  //function make grid
+  function theGrid(frogStartPosition) {
+    for (let i = 0; i < cellCount; i++) {
+      const cell = document.createElement('div')
+      cell.innerText = i //number of cell is in index
+      grid.appendChild(cell)
+      cells.push(cell)
+    }
+    addFrog(frogStartPosition)
+    // obstacles()
+  }
+  
   // function add/remove frog
   function addFrog(position) {
     console.log('checking frog position ->', position)
@@ -56,62 +65,47 @@ function init() {
     cells[position].classList.remove(frogClass)
   }
   // function add/remove car
-  function addCar(position) {
-    console.log('checking car position ->', position)
-    cells[position].classList.add(carClass)
-  }
-  function removeCar(position) {
-    cells[position].classList.remove(carClass)
-  }
+  // function addCar(position) {
+  //   console.log('checking car position ->', position)
+  //   cells[position].classList.add(carClass)
+  // }
+  // function removeCar(position) {
+  //   cells[position].classList.remove(carClass)
+  // }
   // function add/remove logs
-  function addLog(position) {
-    console.log('checking log position ->', position)
-    cells[position].classList.add(logClass)
-  }
-  function removeLog(position) {
-    cells[position].classList.remove(logClass)
-  }
-
-  //function make grid
-
-  function theGrid(frogStart) {
-    for (let i = 0; i < cellCount; i++) {
-      const cell = document.createElement('div')
-      cell.innerText = i //number of cell is in index
-      grid.appendChild(cell)
-      cells.push(cell)
-    }
-    addFrog(frogStart)
-    obstacles()
-  }
+  // function addLog(position) {
+  //   console.log('checking log position ->', position)
+  //   cells[position].classList.add(logClass)
+  // }
+  // function removeLog(position) {
+  //   cells[position].classList.remove(logClass)
+  // }
 
   // function for key movements to manipulate frog jumps
   function keyMoves(event) {
-    const key = event.keycode
+    const key = event.keyCode
     const left = 37
     const right = 39
     const up = 38
     const down = 40
 
-    console.log('frogs position -->', frogPosition)
-    removeFrog(frogPosition)
+    console.log('frogs position -->', frogCurrentPosition)
+    removeFrog(frogCurrentPosition)
 
     // if statments for keys
     //define positions
-    if (key === right && frogPosition % size !== size - 1) { 
-      frogPosition++ 
-    } else if (key === left && frogPosition % size !== 0) { 
-      frogPosition-- 
-    } else if (key === up && frogPosition >= size) { 
-      frogPosition -= size 
-    } else if (key === down && frogPosition + size <= cellCount - 1) { 
-      frogPosition += size 
+    if (key === right && frogCurrentPosition % width !== width - 1) { 
+      frogCurrentPosition++ 
+    } else if (key === left && frogCurrentPosition % width !== 0) { 
+      frogCurrentPosition-- 
+    } else if (key === up && frogCurrentPosition >= width) { 
+      frogCurrentPosition -= width 
+    } else if (key === down && frogCurrentPosition + width <= cellCount - 1) { 
+      frogCurrentPosition += width 
     } else {
       console.log('not right keys') 
     }
-    addFrog(frogPosition)
-    win()
-    lose()
+    addFrog(frogCurrentPosition)
   }
 
   
@@ -123,12 +117,12 @@ function init() {
 
   
   // function for obstacle movements
-  function obstacles(){
-    addLog(28)
-    addCar(78)
+  // function obstacles(){
+  //   addLog(28)
+  //   addCar(78)
 
     
-  }
+  // }
   // setInterval for regular movement across screen (can maybe use this to later create harder levels at faster speeds)
   // car and logs will move one cell left every second 
   // will need add carleave and logleave and then readd car and log to next cell
@@ -137,7 +131,7 @@ function init() {
   // eventlistner on start button with key movement function 
   // eventlistener on keyboard to start obstacle movements once space is clicked
   document.addEventListener('keydown', keyMoves)
-  theGrid(frogStart)
+  theGrid(frogStartPosition)
 }
 
 window.addEventListener('DOMContentLoaded', init)
