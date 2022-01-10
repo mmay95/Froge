@@ -7,6 +7,17 @@ body {
   margin: 0;
 }
 
+.start-button{
+  width: 190px;
+  height: 65px;
+  background-color: white;
+  border: none;
+  box-shadow: 0 0 20px 0 rgb(253, 224, 204);
+  border-radius: 20px;
+  font-size: 25px;
+  color:black;
+  margin-bottom: 160px;
+}
 
 .grid-wrapper {
   height: 100vh;
@@ -33,14 +44,46 @@ body {
   width: 10%;
 }
 
-.grid div.frog {
-  background-color: green;
-}
-
 .grid div.car {
-  background-color: blue;
+  background-image: url('images/car.png');
+  background-size: 100%; 
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .grid div.log {
-  background-color: brown;
+  /* background-color: brown;  */
+  background-image: url('images/log.png');
+  background-size: 100%; 
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.grid div.croc{
+  background-image: url('images/croc.png');
+  background-size: 280%; 
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.grid div.safe{
+ background-color: lightgreen;
+}
+
+.grid div.home {
+  background-image: url('images/lilypad.png');
+  background-size: 100%; 
+  background-repeat: no-repeat;
+  background-position: center;}
+
+.grid div.pad {
+  background-color: rgb(3, 94, 0);
+}
+
+.grid div.river {
+  background-color: lightblue;
+}
+
+.grid div.frog {
+  background-color: green;
 }

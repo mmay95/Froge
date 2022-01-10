@@ -16,122 +16,180 @@
 
 
 function init() {
-
-  //grid 
-
-  // load page -? 
-  // endgame display 
-
-
-
-  //Elements 
-  // .grid 
+  //GRID 
   const grid = document.querySelector('.grid')
   const width = 10
   const cellCount = width * width
   const cells = []
-
-  //frog
+  //FROG
   const frogClass = 'frog'
   const frogStartPosition = 94
   let frogCurrentPosition = 94
-  // //car
-  // const carClass = 'car'
-  // let carStart = 0
-  // let carPosition = 0
-  // //log
-  // const logClass = 'log'
-  // let logStart = 0
-  // let logPosition = 0
+  //CAR
+  const carClass = 'car'
+  let carArray = [80, 84, 87]
+  //LOG
+  const logClass = 'log'
+  let logArray = [27, 25, 23, 21]
+  //CROC
+  const crocClass = 'croc'
+  let crocArray = [58, 54, 50]
+  //BACKGROUNDS & HOME
+  const homeClass = 'home'
+  const safeClass = 'safe'
+  const padClass = 'pad'
+  const riverClass = 'river'
 
-  //function make grid
-  function theGrid(frogStartPosition) {
+
+  // FUNCTION TO MAKE GRID AND ADD CLASSES FOR HOME, SAFE SPACES AND RIVER
+  function makeGrid() {
+    // GRID FORMATION
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div')
       cell.innerText = i //number of cell is in index
       grid.appendChild(cell)
       cells.push(cell)
+
+      // ADDING BACKGROUND CLASSES
+      if (i >= 0 && i <= 9 && i % 3 === 0) {
+        cell.classList.add(homeClass)
+      } else if (i >= 10 && i <= 19) {
+        cell.classList.add(safeClass)
+      } else if (i >= 30 && i <= 49) {
+        cell.classList.add(riverClass)
+      } else if (i >= 60 && i <= 79) {
+        cell.classList.add(safeClass)
+      } else {
+        console.log('tile colours done')
+      }
     }
-    addFrog(frogStartPosition)
-    // obstacles()
   }
-  
-  // function add/remove frog
+
+
+  //START FUNCTION: INCLUDES FUNCTIONS FOR GRID, FROG & OBSTACLES WITH SET INTERVAL TIMES
+  function startGame() {
+    makeGrid(frogStartPosition)
+    addFrog(frogStartPosition)
+    addCars()
+    addLogs()
+    addCrocs()
+    const logTimer = setInterval(moveLogs, 400)
+    const carTimer = setInterval(moveCars, 200)
+    const crocTimer = setInterval(moveCrocs, 800)
+  }
+
+
+  //FUNCTIONS TO ADD & REMOVE FROG, CAR, LOG AND CROC CLASSES (added to html via JS)
   function addFrog(position) {
-    console.log('checking frog position ->', position)
     cells[position].classList.add(frogClass)
   }
   function removeFrog(position) {
     cells[position].classList.remove(frogClass)
   }
-  // function add/remove car
-  // function addCar(position) {
-  //   console.log('checking car position ->', position)
-  //   cells[position].classList.add(carClass)
-  // }
-  // function removeCar(position) {
-  //   cells[position].classList.remove(carClass)
-  // }
-  // function add/remove logs
-  // function addLog(position) {
-  //   console.log('checking log position ->', position)
-  //   cells[position].classList.add(logClass)
-  // }
-  // function removeLog(position) {
-  //   cells[position].classList.remove(logClass)
-  // }
+  function addCars() {
+    for (let i = 0; i < carArray.length; i++) {
+      cells[carArray[i]].classList.add(carClass)
+    }
+  }
+  function removeCars() {
+    for (let i = 0; i < carArray.length; i++) {
+      cells[carArray[i]].classList.remove(carClass)
+    }
+  }
+  function addLogs() {
+    for (let i = 0; i < logArray.length; i++) {
+      cells[logArray[i]].classList.add(logClass)
+    }
+  }
+  function removeLogs() {
+    for (let i = 0; i < logArray.length; i++) {
+      cells[logArray[i]].classList.remove(logClass)
+    }
+  }
+  function addCrocs() {
+    for (let i = 0; i < crocArray.length; i++) {
+      cells[crocArray[i]].classList.add(crocClass)
+    }
+  }
 
-  // function for key movements to manipulate frog jumps
+  function removeCrocs() {
+    for (let i = 0; i < crocArray.length; i++) {
+      cells[crocArray[i]].classList.remove(crocClass)
+    }
+  }
+
+
+  //FUNCTION TO MAKE FROG RESPOND TO KEY MOVEMENT BY USER
   function keyMoves(event) {
     const key = event.keyCode
     const left = 37
     const right = 39
     const up = 38
     const down = 40
-
-    console.log('frogs position -->', frogCurrentPosition)
     removeFrog(frogCurrentPosition)
-
-    // if statments for keys
-    //define positions
-    if (key === right && frogCurrentPosition % width !== width - 1) { 
-      frogCurrentPosition++ 
-    } else if (key === left && frogCurrentPosition % width !== 0) { 
-      frogCurrentPosition-- 
-    } else if (key === up && frogCurrentPosition >= width) { 
-      frogCurrentPosition -= width 
-    } else if (key === down && frogCurrentPosition + width <= cellCount - 1) { 
-      frogCurrentPosition += width 
+    if (key === right && frogCurrentPosition % width !== width - 1) {
+      frogCurrentPosition++
+    } else if (key === left && frogCurrentPosition % width !== 0) {
+      frogCurrentPosition--
+    } else if (key === up && frogCurrentPosition >= width) {
+      frogCurrentPosition -= width
+    } else if (key === down && frogCurrentPosition + width <= cellCount - 1) {
+      frogCurrentPosition += width
     } else {
-      console.log('not right keys') 
+      console.log('not right keys')
     }
     addFrog(frogCurrentPosition)
   }
 
-  
 
-  // if statement added for each key 
-  // end on removing frog function
-  // outside of if statment -> add frog to new position
-  // if frog position === .home position then alert 'you win'
+  //FUNCTIONS FOR OBSTACLE MOVEMENTS
+  function moveLogs() {
+    removeLogs()
+    for (let i = 0; i < logArray.length; i++) {
+      if (logArray[i] === 20) {
+        logArray[i] = logArray[i] + width
+        console.log(logArray[i])
+      }
+    }
+    logArray = logArray.map(log => log - 1)
+    addLogs()
+  }
 
-  
-  // function for obstacle movements
-  // function obstacles(){
-  //   addLog(28)
-  //   addCar(78)
+  function moveCars() {
+    removeCars()
+    for (let i = 0; i < carArray.length; i++) {
+      if (carArray[i] === 80) {
+        carArray[i] = carArray[i] + width
+        console.log(carArray[i])
+      }
+    }
+    carArray = carArray.map(car => car - 1)
+    addCars()
+  }
 
-    
-  // }
-  // setInterval for regular movement across screen (can maybe use this to later create harder levels at faster speeds)
-  // car and logs will move one cell left every second 
-  // will need add carleave and logleave and then readd car and log to next cell
-  // once all logs and cars have moved one cell left, they shoul reappear at beginning cell to create illusion of continuous movement 
+  function moveCrocs() {
+    removeCrocs()
+    for (let i = 0; i < crocArray.length; i++) {
+      if (crocArray[i] === 59) {
+        crocArray[i] = crocArray[i] - width
+        console.log(crocArray[i])
+      }
+    }
+    crocArray = crocArray.map(croc => croc + 1)
+    addCrocs()
+  }
+
+
+
+
   // if statment for when log or car touches frog -> game over alert -> if frogPosition === carPosition || logPosition {window alert game over? or score -10}
-  // eventlistner on start button with key movement function 
   // eventlistener on keyboard to start obstacle movements once space is clicked
+  // if frog position === .home position then alert 'you win'
+  // alert message if user lands on section that isnt home
+
   document.addEventListener('keydown', keyMoves)
-  theGrid(frogStartPosition)
+  //CALL STARTGAME FUNCTION
+  startGame()
 }
 
 window.addEventListener('DOMContentLoaded', init)
