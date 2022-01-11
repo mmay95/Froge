@@ -16,11 +16,17 @@
 
 
 function init() {
+  //Q SELECTOR
+  const carHorn = document.querySelector('.carHorn')
+  
   //GRID 
   const grid = document.querySelector('.grid')
   const width = 10
   const cellCount = width * width
   const cells = []
+  // LIFE SCORE
+  const lives = document.querySelector('.lives-left')
+  lives.innerText = 3
   //FROG
   const frogClass = 'frog'
   const frogStartPosition = 94
@@ -37,8 +43,9 @@ function init() {
   //BACKGROUNDS & HOME
   const homeClass = 'home'
   const safeClass = 'safe'
-  const padClass = 'pad'
   const riverClass = 'river'
+  const lilypadClass = 'lily'
+  const lilypadArray = [32, 33, 43, 45, 37, 38, 48]
 
 
   // FUNCTION TO MAKE GRID AND ADD CLASSES FOR HOME, SAFE SPACES AND RIVER
@@ -73,9 +80,12 @@ function init() {
     addCars()
     addLogs()
     addCrocs()
+    addLily()
     const logTimer = setInterval(moveLogs, 400)
     const carTimer = setInterval(moveCars, 200)
     const crocTimer = setInterval(moveCrocs, 800)
+    collision()
+
   }
 
 
@@ -111,10 +121,14 @@ function init() {
       cells[crocArray[i]].classList.add(crocClass)
     }
   }
-
   function removeCrocs() {
     for (let i = 0; i < crocArray.length; i++) {
       cells[crocArray[i]].classList.remove(crocClass)
+    }
+  }
+  function addLily() {
+    for (let i = 0; i < lilypadArray.length; i++) {
+      cells[lilypadArray[i]].classList.add(lilypadClass)
     }
   }
 
@@ -148,11 +162,11 @@ function init() {
     for (let i = 0; i < logArray.length; i++) {
       if (logArray[i] === 20) {
         logArray[i] = logArray[i] + width
-        console.log(logArray[i])
       }
     }
     logArray = logArray.map(log => log - 1)
     addLogs()
+    collision()
   }
 
   function moveCars() {
@@ -160,11 +174,11 @@ function init() {
     for (let i = 0; i < carArray.length; i++) {
       if (carArray[i] === 80) {
         carArray[i] = carArray[i] + width
-        console.log(carArray[i])
       }
     }
     carArray = carArray.map(car => car - 1)
     addCars()
+    collision()
   }
 
   function moveCrocs() {
@@ -172,15 +186,44 @@ function init() {
     for (let i = 0; i < crocArray.length; i++) {
       if (crocArray[i] === 59) {
         crocArray[i] = crocArray[i] - width
-        console.log(crocArray[i])
       }
     }
     crocArray = crocArray.map(croc => croc + 1)
     addCrocs()
+    collision()
   }
 
-
-
+  function collision() {
+    //if statement -> if frog reaches obstacle1 then add class 'crash croc', 'crash car', 'crash river' 
+    // crash css -> gif for each collision 
+    if (cells[frogCurrentPosition].classList.contains('car')) {
+      removeFrog(frogCurrentPosition)
+      frogCurrentPosition = frogStartPosition
+      carHorn.play()
+      lives.innerText = (lives.innerText) - 1
+      addFrog(frogStartPosition)
+      console.log('ran over')
+    } else if (cells[frogCurrentPosition].classList.contains('croc')) {
+      removeFrog(frogCurrentPosition)
+      frogCurrentPosition = frogStartPosition
+      // audio.play()
+      lives.innerText = (lives.innerText) - 1
+      addFrog(frogStartPosition)
+      console.log('youve been eaten')
+    } else if (cells[frogCurrentPosition].classList.contains('log')) {
+      removeFrog(frogCurrentPosition)
+      frogCurrentPosition = frogStartPosition
+      // audio.play()
+      lives.innerText = (lives.innerText) - 1
+      addFrog(frogStartPosition)
+      console.log('battered')
+    } else {
+      console.log()
+    }
+    // if frog reaches log, move with log?
+    // if lives.innerText === 0 then popup & restart
+  }
+  // collision()
 
   // if statment for when log or car touches frog -> game over alert -> if frogPosition === carPosition || logPosition {window alert game over? or score -10}
   // eventlistener on keyboard to start obstacle movements once space is clicked

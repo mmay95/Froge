@@ -1,15 +1,34 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Frogger Game</title>
-    <link rel="stylesheet" href="main.css">
-    <script src="scripts.js" charset="utf-8"></script>
-  </head>
-  <body>
+
+<head>
+  <meta charset="utf-8">
+  <title>Frogger Game</title>
+  <link rel="stylesheet" href="main.css">
+  <script src="scripts.js" charset="utf-8"></script>
+</head>
+
+<body>
+
+  <div class="button-wrapper">
     <button class="start-button">Cross The Frog</button>
-    <div class="grid-wrapper">
-      <div class="grid"></div>
-    </div>
-  </body>
+  </div>
+  <div class='lives-counter'>
+    <p> You have <span class="lives-left"></span> lives left</p>
+  </div>
+  <div class="play-container">
+    <p class="play-description"> 
+      Hello fellow helper! What a saint you are. Now since your saintly self is here, make yourself useful and save this death defying frog!
+    </p>
+  </div>
+  <div class="grid-wrapper">
+    <div class="grid"></div>
+  </div>
+
+  <audio class="carHorn">
+    <source src="audio/car-horn.wav">
+  </audio>
+
+</body>
+
 </html>
