@@ -10,21 +10,66 @@
 
 <body>
 
-  <div class="button-wrapper">
-    <button class="start-button">Cross The Frog</button>
-  </div>
-  <div class='lives-counter'>
-    <p> You have <span class="lives-left"></span> lives left</p>
-  </div>
-  <div class="play-container">
-    <p class="play-description"> 
-      Hello fellow helper! What a saint you are. Now since your saintly self is here, make yourself useful and save this death defying frog!
-    </p>
-  </div>
+  <!-- CONTAINS GAME + POPUPS -->
   <div class="grid-wrapper">
+  
+  <!-- LIVES COUNTER -->
+    <div class='lives-counter'>
+      <p> You have <span class="lives-left"></span> lives left</p>
+    </div>
+
+
+    <!-- START POP UP CONTAINER -> DESCRIPTION & START BUTTON-->
+    <div class="start-popup-container active">
+      <div class="start-popup">
+        <div class="start-description">
+          <h2> FROGE: A JOURNEY THROUGH DEATH</h2>
+          <p> Hello fellow helper! What a saint you are. Now since your saintly self is here, make yourself useful and save
+            this death defying frog! </p>
+          <button id="start-button">Cross The Frog</button>
+        </div>
+        <div class="logo-images">
+          <!-- enter images here -->
+        </div>
+      </div>
+    </div>
+
+<!-- GAME OVER POP UP -->
+<div class="gameover-popup-container">
+  <div class="gameover-popup">
+    <div class="gameover-description">
+      <h2> OH YOU MURDERER</h2>
+      <p> FROGE'S BLOOD LIES ON YOUR HANDS YOU CRIMINAL </p>
+      <button id="replay-button">Play again?</button>
+    </div>
+    <div class="logo-images">
+      <!-- enter images here -->
+    </div>
+  </div>
+</div>
+
+<!-- YOU WIN POP UP -->
+<div class="win-popup-container">
+  <div class="win-popup">
+    <div class="win-description">
+      <h2> YOU WIN! </h2>
+      <p> FROGE'S HAS RETURNED IN GOOD HEALTH </p>
+      <button id="replay-button">play again?</button>
+    </div>
+    <div class="logo-images">
+      <!-- enter images here -->
+    </div>
+  </div>
+</div>
+
+    <!-- GRID SECTION FOR JS DIVS -->
     <div class="grid"></div>
+
   </div>
 
+
+
+  <!-- AUDIOS -->
   <audio class="carHorn">
     <source src="audio/car-horn.wav">
   </audio>
@@ -32,3 +77,4 @@
 </body>
 
 </html>
+

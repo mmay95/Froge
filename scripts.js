@@ -1,24 +1,12 @@
-// create div, assign class, get div from dom & append new grid size to it
-// variables for cell size and count 
-// create loop for grid -> innertext and add into empty array
-// create a start button -> eventlistener that triggers frogstart function and makes it appear on grid
-// create frog start & frog current position
-// create function to make grid which loops till cell size number specified
-// frog added function -> makes frog appear in specified area with a classList.add 
-// frog left function -> classList.remove
-// create event listeners for key movements -> keyCode for up down left and right or even a spacebar key to jump straight up
-// create function with if statement for each direction
-// make sure frog cant move beyond grid
-// create obstacles for frog via classList.add
-// car and logs must be animated and move across grid cells right -> left
-// setInterval to move objects across -> carAdd() carLeave()
-// create function that involves alert message of 'game over' if frog hits obstacle  statment that
-
-
 function init() {
   //Q SELECTOR
   const carHorn = document.querySelector('.carHorn')
-  
+  const startPopUp = document.querySelector('.start-popup-container')
+  const gameOverPopUp = document.querySelector('.gameover-popup-container')
+  const winPopUp = document.querySelector('.win-popup-container')
+  const startButton = document.querySelector('#start-button')
+  const replayButton = document.querySelectorAll('#replay-button')
+
   //GRID 
   const grid = document.querySelector('.grid')
   const width = 10
@@ -67,14 +55,14 @@ function init() {
       } else if (i >= 60 && i <= 79) {
         cell.classList.add(safeClass)
       } else {
-        console.log('tile colours done')
+        console.log()
       }
     }
   }
 
-
   //START FUNCTION: INCLUDES FUNCTIONS FOR GRID, FROG & OBSTACLES WITH SET INTERVAL TIMES
   function startGame() {
+    startPopUp.classList.remove('active')
     makeGrid(frogStartPosition)
     addFrog(frogStartPosition)
     addCars()
@@ -85,7 +73,6 @@ function init() {
     const carTimer = setInterval(moveCars, 200)
     const crocTimer = setInterval(moveCrocs, 800)
     collision()
-
   }
 
 
@@ -129,6 +116,7 @@ function init() {
   function addLily() {
     for (let i = 0; i < lilypadArray.length; i++) {
       cells[lilypadArray[i]].classList.add(lilypadClass)
+      //remove river
     }
   }
 
@@ -193,46 +181,78 @@ function init() {
     collision()
   }
 
+  // FUNCTION FOR COLLISION RESPONSES
+  //(to make collision code cleaner)
+  function collisionResponse() {
+    removeFrog(frogCurrentPosition)
+    frogCurrentPosition = frogStartPosition
+    lives.innerText = (lives.innerText) - 1
+    addFrog(frogStartPosition)
+    checkGameOver()
+  }
+
+  // FUNCTION TO CHECK FOR COLLISIONS 
   function collision() {
-    //if statement -> if frog reaches obstacle1 then add class 'crash croc', 'crash car', 'crash river' 
-    // crash css -> gif for each collision 
-    if (cells[frogCurrentPosition].classList.contains('car')) {
-      removeFrog(frogCurrentPosition)
-      frogCurrentPosition = frogStartPosition
+    if (cells[frogCurrentPosition].classList.contains('river') && 
+    cells[frogCurrentPosition].classList.contains('lily')) {
+      console.log('lily safe')
+    } else if (cells[frogCurrentPosition].classList.contains('car')) {
+      collisionResponse()
       carHorn.play()
-      lives.innerText = (lives.innerText) - 1
-      addFrog(frogStartPosition)
       console.log('ran over')
     } else if (cells[frogCurrentPosition].classList.contains('croc')) {
-      removeFrog(frogCurrentPosition)
-      frogCurrentPosition = frogStartPosition
-      // audio.play()
-      lives.innerText = (lives.innerText) - 1
-      addFrog(frogStartPosition)
+      collisionResponse()
+      //add audio
       console.log('youve been eaten')
     } else if (cells[frogCurrentPosition].classList.contains('log')) {
-      removeFrog(frogCurrentPosition)
-      frogCurrentPosition = frogStartPosition
-      // audio.play()
-      lives.innerText = (lives.innerText) - 1
-      addFrog(frogStartPosition)
+      collisionResponse()
+      //add audio
       console.log('battered')
+    } else if (cells[frogCurrentPosition].classList.contains('river')) {
+      collisionResponse()
+      //add audio
+      console.log('drowned')
+    } else {
+      win()
+    }
+  }
+
+  //FUNCTION TO REFRESH PAGE EACH TIME REPLAY BUTTON IS CLICKED
+  function reloadGame() {
+    window.location.reload()
+  }
+  
+  // FUNCTION TO CHECK LIVES ARE AT 0 -> ENDGAME
+  function checkGameOver() {
+    if (lives.innerText === '0') {
+      gameOverPopUp.classList.add('active')
+      console.log('game over')
     } else {
       console.log()
     }
-    // if frog reaches log, move with log?
-    // if lives.innerText === 0 then popup & restart
   }
-  // collision()
 
-  // if statment for when log or car touches frog -> game over alert -> if frogPosition === carPosition || logPosition {window alert game over? or score -10}
+  function win() {
+    if (cells[frogCurrentPosition].classList.contains('home')) {
+      winPopUp.classList.add('active')
+      //pop up you win
+    } else {
+      console.log()
+    }
+  }
+
+  // crash css -> gif for each colliion 
   // eventlistener on keyboard to start obstacle movements once space is clicked
   // if frog position === .home position then alert 'you win'
-  // alert message if user lands on section that isnt home
 
+  //GAME STARTS ON BUTTON CLICK
+  startButton.addEventListener('click', startGame)
+
+  //GAME RELOADS ON REPLAY BUTTON CLICK
+  replayButton.forEach(button => button.addEventListener('click', reloadGame))
+
+  //EVENT LISTENER TO RESPOND TO KEY MOVEMENTS
   document.addEventListener('keydown', keyMoves)
-  //CALL STARTGAME FUNCTION
-  startGame()
 }
 
 window.addEventListener('DOMContentLoaded', init)

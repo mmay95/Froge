@@ -7,20 +7,69 @@ body {
   margin: 0;
 }
 
-.play-container{
-  display:flex;
+.start-popup-container{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transition: all 350ms;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap:wrap;
-  border: 12px solid red;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  opacity: 0;
+  pointer-events: none;
 }
 
-.button-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.start-popup-container.active{
+opacity: 1;
+pointer-events: auto;
 }
+
+.gameover-popup-container{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transition: all 350ms;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: rgba(75, 31, 31, 0.8);
+  display: flex;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.gameover-popup-container.active {
+opacity: 1;
+pointer-events: auto;
+}
+
+.win-popup-container{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transition: all 350ms;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: rgba(28, 17, 124, 0.8);
+  display: flex;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.win-popup-container.active {
+opacity: 1;
+pointer-events: auto;
+}
+
 
 .lives-counter{
   display: flex;
@@ -28,7 +77,18 @@ body {
   align-items: center;
 }
 
-.start-button{
+#start-button{
+  width: 190px;
+  height: 65px;
+  background-color: white;
+  border: none;
+  box-shadow: 0 0 20px 0 rgb(253, 224, 204);
+  border-radius: 20px;
+  font-size: 25px;
+  color:black;
+}
+
+#replay-button{
   width: 190px;
   height: 65px;
   background-color: white;
@@ -98,7 +158,6 @@ body {
   background-position: center;
 }
 
-
 .grid div.river {
   background-color: lightblue;
 }
@@ -117,3 +176,7 @@ body {
   background-position: center;
 }
 
+.grid div.croc.blood {
+  background-image: url('images/blood.gif');
+  background-size: 100%;
+}
