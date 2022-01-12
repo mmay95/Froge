@@ -1,10 +1,13 @@
 * {
   box-sizing: border-box;
+  
 }
 
 body {
-  height: 100vh;
   margin: 0;
+  font-family: 'Mochiy Pop P One', sans-serif;
+  background: rgb(151,215,146);
+  background: radial-gradient(circle, rgba(151,215,146,1) 0%, rgba(224,211,114,1) 100%);
 }
 
 .start-popup-container{
@@ -15,7 +18,7 @@ body {
   right: 0;
   transition: all 350ms;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   flex-direction: column;
   background-color: rgba(255, 255, 255, 0.8);
   display: flex;
@@ -28,6 +31,82 @@ opacity: 1;
 pointer-events: auto;
 }
 
+.start-popup {
+  background-image: url('images/background.gif');
+  background-repeat: no-repeat;
+  background-size: 3000%;
+  height: 700px;
+  width: 1150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  text-align: center;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  align-content: center;
+}
+
+.start-description{
+  display: flex;
+  height: 600px;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+#start-button{
+  width: 200px;
+  height: 65px;
+  background-color: white;
+  border: none;
+  box-shadow: 0 0 20px 0 rgb(253, 224, 204);
+  border-radius: 20px;
+  font-size: 20px;
+  color:black;
+}
+
+#replay-button{
+  width: 200px;
+  height: 65px;
+  background-color: white;
+  border: none;
+  box-shadow: 0 0 20px 0 rgb(253, 224, 204);
+  border-radius: 20px;
+  font-size: 20px;
+  color:black;
+  margin-top: 40px;
+}
+
+#popup-title {
+  color: #DEE63B;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #230202;
+  font-size: 40px;
+}
+
+p {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 18px;
+}
+
+#gameplay-info{
+  text-align: center;
+  font-weight: bold;
+}
+#highlight{
+  color: #DEE63B;
+  -webkit-text-stroke-width: 0.15px;
+  -webkit-text-stroke-color: #230202;
+}
+.keys {
+  height: 70px;
+  width: 100px;
+  padding-bottom: 10px;
+}
+
 .gameover-popup-container{
   position: fixed;
   top: 0;
@@ -36,9 +115,9 @@ pointer-events: auto;
   right: 0;
   transition: all 350ms;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   flex-direction: column;
-  background-color: rgba(75, 31, 31, 0.8);
+  background-color: rgba(75, 31, 31, 0.886);
   display: flex;
   opacity: 0;
   pointer-events: none;
@@ -49,6 +128,41 @@ opacity: 1;
 pointer-events: auto;
 }
 
+.gameover-popup {
+  background-color: rgba(75, 31, 31, 0.886);
+  height: 700px;
+  width: 1150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  text-align: center;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  align-content: center;
+}
+
+.gameover-description{
+  display: flex;
+  height: 600px;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+#gameover-popup-title {
+  color: #a50000;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #230202;
+  font-size: 40px;
+}
+#gameover-info{
+  text-align: center;
+  font-weight: bold;
+  color: white;
+}
+
 .win-popup-container{
   position: fixed;
   top: 0;
@@ -57,7 +171,7 @@ pointer-events: auto;
   right: 0;
   transition: all 350ms;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   flex-direction: column;
   background-color: rgba(28, 17, 124, 0.8);
   display: flex;
@@ -70,41 +184,75 @@ opacity: 1;
 pointer-events: auto;
 }
 
+.win-popup {
+  background-color: rgba(28, 17, 124, 0.879);
+  height: 700px;
+  width: 1150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  text-align: center;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  align-content: center;
+}
+
+.win-description{
+  display: flex;
+  height: 600px;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+#win-popup-title {
+  color: #26e5e8;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #230202;
+  font-size: 70px;
+}
+#win-info{
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  font-size: 20px;
+}
+
 
 .lives-counter{
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 20px;
 }
 
-#start-button{
-  width: 190px;
-  height: 65px;
-  background-color: white;
-  border: none;
-  box-shadow: 0 0 20px 0 rgb(253, 224, 204);
-  border-radius: 20px;
-  font-size: 25px;
-  color:black;
+.lives-text{
+  font-family: 'Mochiy Pop P One', sans-serif;
+  color: #230202;
+  font-size: 30px;
 }
 
-#replay-button{
-  width: 190px;
-  height: 65px;
-  background-color: white;
-  border: none;
-  box-shadow: 0 0 20px 0 rgb(253, 224, 204);
-  border-radius: 20px;
-  font-size: 25px;
-  color:black;
+.lives-left{
+  color: #DEE63B;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #230202;
+  font-size: 60px;
 }
+
+
 
 .grid-wrapper {
-  height: 70%;
+  height: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-evenly;
   align-items: center;
+  padding-top: 80px;
+  padding-left: 20px;
+  padding-right: 40px;
 }
 
 .grid {
@@ -142,23 +290,37 @@ pointer-events: auto;
 
 .grid div.croc{
   background-image: url('images/croc.png');
-  background-size: 280%; 
+  background-size: 100%; 
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .grid div.safe{
- background-color: lightgreen;
+  background-image: url('images/grass.png');
+  background-size: 100%; 
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .grid div.home {
-  background-image: url('images/home.jpg');
-  background-size: 120%; 
+  background-image: url('images/home1.png');
+  background-size: 90%; 
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .grid div.river {
+  background-color:#92b6e9;
+}
+
+.grid div.ripples {
+    background-image: url('images/ripples.gif');
+    background-size: 160%; 
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.grid div.obstacleRiver {
   background-color: lightblue;
 }
 
@@ -170,13 +332,21 @@ pointer-events: auto;
 }
 
 .grid div.frog {
-  background-image: url('images/frog.jpg');
-  background-size: 120%; 
+  background-image: url('images/frog.png');
+  background-size: 140%; 
   background-repeat: no-repeat;
   background-position: center;
 }
 
-.grid div.croc.blood {
-  background-image: url('images/blood.gif');
-  background-size: 100%;
+.logo-container{
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0px 20px 20px;
+}
+
+.logo {
+  height: 400px;
+  width: 400px;
+  margin-top: 10px;
+  border-radius: 100%;
 }

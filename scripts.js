@@ -32,8 +32,11 @@ function init() {
   const homeClass = 'home'
   const safeClass = 'safe'
   const riverClass = 'river'
+  const obstacleRiverClass = 'obstacleRiver'
   const lilypadClass = 'lily'
   const lilypadArray = [32, 33, 43, 45, 37, 38, 48]
+  const rippleClass = 'ripples'
+  const rippleArray = [30, 36, 47, 41]
 
 
   // FUNCTION TO MAKE GRID AND ADD CLASSES FOR HOME, SAFE SPACES AND RIVER
@@ -50,8 +53,12 @@ function init() {
         cell.classList.add(homeClass)
       } else if (i >= 10 && i <= 19) {
         cell.classList.add(safeClass)
+      } else if (i >= 20 && i <= 29) {
+        cell.classList.add(obstacleRiverClass)
       } else if (i >= 30 && i <= 49) {
         cell.classList.add(riverClass)
+      } else if (i >= 50 && i <= 59) {
+        cell.classList.add(obstacleRiverClass)
       } else if (i >= 60 && i <= 79) {
         cell.classList.add(safeClass)
       } else {
@@ -69,6 +76,7 @@ function init() {
     addLogs()
     addCrocs()
     addLily()
+    addRipple()
     const logTimer = setInterval(moveLogs, 400)
     const carTimer = setInterval(moveCars, 200)
     const crocTimer = setInterval(moveCrocs, 800)
@@ -119,7 +127,12 @@ function init() {
       //remove river
     }
   }
-
+  function addRipple() {
+    for (let i = 0; i < rippleArray.length; i++) {
+      cells[rippleArray[i]].classList.add(rippleClass)
+      //remove river
+    }
+  }
 
   //FUNCTION TO MAKE FROG RESPOND TO KEY MOVEMENT BY USER
   function keyMoves(event) {
@@ -193,8 +206,8 @@ function init() {
 
   // FUNCTION TO CHECK FOR COLLISIONS 
   function collision() {
-    if (cells[frogCurrentPosition].classList.contains('river') && 
-    cells[frogCurrentPosition].classList.contains('lily')) {
+    if (cells[frogCurrentPosition].classList.contains('river') &&
+      cells[frogCurrentPosition].classList.contains('lily')) {
       console.log('lily safe')
     } else if (cells[frogCurrentPosition].classList.contains('car')) {
       collisionResponse()
@@ -211,7 +224,7 @@ function init() {
     } else if (cells[frogCurrentPosition].classList.contains('river')) {
       collisionResponse()
       //add audio
-      console.log('drowned')
+      console.log('drowned') 
     } else {
       win()
     }
@@ -221,7 +234,7 @@ function init() {
   function reloadGame() {
     window.location.reload()
   }
-  
+
   // FUNCTION TO CHECK LIVES ARE AT 0 -> ENDGAME
   function checkGameOver() {
     if (lives.innerText === '0') {
