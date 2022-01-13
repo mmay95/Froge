@@ -7,8 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.googleapis.com"> 
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="main.css">
   <script src="scripts.js" charset="utf-8"></script>
@@ -26,23 +26,26 @@
         <p class="lives-text"> You have <span class="lives-left"></span> lives left</p>
       </div>
     </div>
-
-
-
-
     <!-- START POP UP CONTAINER -> DESCRIPTION & START BUTTON-->
     <div class="start-popup-container active">
       <div class="start-popup">
         <div class="start-description">
           <!-- POP UP TITLE -->
-          <h2 id="popup-title"> FROGE: <br> A JOURNEY THROUGH DEATH</h2>
+          <div class="popup-title-container">
+            <img id="popup-logo" src="images/frog.png" alt="frog-logo">
+            <h2 id="popup-title"> FROGE: <br> A JOURNEY THROUGH DEATH</h2>
+          </div>
           <!-- POP UP GAMEPLAY INFO -->
-          <p id="gameplay-info"> YOUR JOB TODAY IS TO GET FROGE (its french, pronounce it with the pointy thing on the E)<br>
+          <p id="gameplay-info"> YOUR JOB TODAY IS TO GET FROGE (yes its french, pronounce it with the fancy point on
+            the
+            E)<br>
             INTO ONE OF HER MANY MANSIONS<br>
-          <p id="gameplay-info">BUT REMEMBER, THE TRICKY PART IS THAT SHES A TERRIBLE SWIMMER (ITS A SENSITIVE TOPIC) <br>SO ALTHOUGH SHE CAN PASS THROUGH <span id="highlight">SHALLOW</span> WATER, SHE'LL <span id="highlight">DROWN</span> IN THE <span id="highlight">DEEP</span> </p>
+          <p id="gameplay-info">BUT REMEMBER, THE TRICKY PART IS THAT SHES BLIND AS A BAT AND A TERRIBLE SWIMMER<br>
+            (its a sensitive topic, ok?) SO WATCH OUT FOR THE <span id="highlight">OBSTACLES</span> AND <span
+              id="highlight">DEEP</span> WATER,<br> OTHERWISE SHE'LL <span id="highlight">DIE</span> </p>
 
-            <!-- KEYBOARD KEYS IMAGES -->
-          <p>use these to guide our Froge home </p>
+          <!-- KEYBOARD KEYS IMAGES -->
+          <p>use these keys to guide our Froge home </p>
           <div class="keys-container">
             <img class="keys" src="images/keys.png">
           </div>
@@ -57,8 +60,12 @@
     <div class="gameover-popup-container">
       <div class="gameover-popup">
         <div class="gameover-description">
-          <h2 id="gameover-popup-title"> OH YOU MURDERER</h2>
-          <p id="gameover-info"> FROGE'S BLOOD LIES ON YOUR HANDS YOU VILE CRIMINAL OH THE PAIN OH THE LOSS!!! </p>
+          <div class="popup-title-container">
+            <img id="popup-logo" src="images/grave.png" alt="Froge grave">
+            <h2 id="gameover-popup-title"> OH YOU MURDERER!!</h2>
+          </div>
+          <p id="gameover-info"> FROGE'S BLOOD LIES ON YOUR HANDS YOU VILE CRIMINAL!<br>OH THE PAIN!! OH THE LOSS!!!<br>
+            NO FROG SHALL EVER COMPARE! THE TRAGEDY OF IT ALL! </p>
           <button id="replay-button">oh well,<br> PLAY AGAIN?</button>
         </div>
       </div>
@@ -68,8 +75,12 @@
     <div class="win-popup-container">
       <div class="win-popup">
         <div class="win-description">
-          <h2 id="win-popup-title"> YOU WIN! </h2>
-          <p id="win-info"> FROGE'S HAS RETURNED IN GOOD HEALTH! OH REJOICE!! NOW SHE CAN HAVE A NICE HOT BATH!!<br> (the slime build-up can really irritate her armpits you see) </p>
+          <div class="popup-title-container">
+            <img id="popup-logo" src="images/party.png" alt="win party">
+            <h2 id="win-popup-title"> YOU WIN! </h2>
+          </div>
+          <p id="win-info"> FROGE'S HAS RETURNED IN GOOD HEALTH! OH REJOICE!! NOW SHE CAN GET SOME GOOD OLD TLC!!<br>
+            (and maybe put something on that sunburn yikes..) </p>
           <button id="replay-button">PLAY AGAIN?</button>
         </div>
       </div>
@@ -80,19 +91,46 @@
 
   </div>
 
-
-
   <!-- AUDIOS -->
-  <!-- CAR HORN -->
-  <!-- BACKGROUND -->
-  <!-- CROC -->
-  <!-- DROWN -->
-  <!-- LOG -->
+  <!-- MOVEMENTS -->
+  <audio class="movements">
+    <source src="audio/move.wav">
+  </audio>
+  <!-- LOST LIFE -->
+  <audio id="lostLife">
+    <source src="audio/loseLife.wav">
+  </audio>
+  <!-- GAMEOVER -->
+  <audio class="gamesOver">
+    <source src="audio/gameOver.wav">
+  </audio>
   <!-- WIN -->
-  <!-- LOSE -->
+  <audio class="winner">
+    <source src="audio/winGame.wav">
+  </audio>
+
+
+  <!-- CAR HORN -->
   <audio class="carHorn">
     <source src="audio/car-horn.wav">
   </audio>
+  <!-- BACKGROUND -->
+  <audio id="background">
+    <source src="audio/background.mp3">
+  </audio>
+  <!-- CROC -->
+  <audio class="crocBite">
+    <source src="audio/crocBite.mp3">
+  </audio>
+  <!-- DROWN -->
+  <audio class="drown">
+    <source src="audio/splash.wav">
+  </audio>
+  <!-- LOG -->
+  <audio id="logHit">
+    <source src="audio/log.wav">
+  </audio>
+
 
 </body>
 

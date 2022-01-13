@@ -1,6 +1,24 @@
 function init() {
-  //Q SELECTOR
+  // AUDIOS
+  const movements = document.querySelector('.movements')
+  movements.volume = 0.5
+  const lostLife = document.querySelector('#lostLife')
+  lostLife.volume = 0.2
+  const gamesOver = document.querySelector('.gamesOver')
+  gamesOver.volume = 0.3
+  const winner = document.querySelector('.winner')
+  winner.volume = 0.3
   const carHorn = document.querySelector('.carHorn')
+  carHorn.volume = 0.2
+  const crocBite = document.querySelector('.crocBite')
+  crocBite.volume = 0.1
+  const drown = document.querySelector('.drown')
+  drown.volume = 0.2
+  const logHit = document.querySelector('#logHit')
+  logHit.volume = 0.2
+  const background = document.querySelector('#background')
+  background.volume = 0.5
+  // Q SELECTORS
   const startPopUp = document.querySelector('.start-popup-container')
   const gameOverPopUp = document.querySelector('.gameover-popup-container')
   const winPopUp = document.querySelector('.win-popup-container')
@@ -27,26 +45,29 @@ function init() {
   let logArray = [27, 25, 23, 21]
   //CROC
   const crocClass = 'croc'
-  let crocArray = [58, 54, 50]
+  let crocArray = [59, 56, 54, 52, 50]
   //BACKGROUNDS & HOME
   const homeClass = 'home'
   const safeClass = 'safe'
   const riverClass = 'river'
   const obstacleRiverClass = 'obstacleRiver'
   const lilypadClass = 'lily'
-  const lilypadArray = [32, 33, 43, 45, 37, 38, 48]
+  const lilypadArray = [42, 36, 43, 45, 37, 38, 48]
   const rippleClass = 'ripples'
-  const rippleArray = [30, 36, 47, 41]
-
+  const rippleArray = [30, 34, 36, 47, 41]
+  const tree1Class = 'tree1'
+  const tree1Array = [65, 72]
+  const tree2Class = 'tree2'
+  const tree2Array = [60, 77]
 
   // FUNCTION TO MAKE GRID AND ADD CLASSES FOR HOME, SAFE SPACES AND RIVER
   function makeGrid() {
     // GRID FORMATION
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div')
-      cell.innerText = i //number of cell is in index
       grid.appendChild(cell)
       cells.push(cell)
+      background.play()
 
       // ADDING BACKGROUND CLASSES
       if (i >= 0 && i <= 9 && i % 3 === 0) {
@@ -77,9 +98,11 @@ function init() {
     addCrocs()
     addLily()
     addRipple()
-    const logTimer = setInterval(moveLogs, 400)
-    const carTimer = setInterval(moveCars, 200)
-    const crocTimer = setInterval(moveCrocs, 800)
+    addTree1()
+    addTree2()
+    const logTimer = setInterval(moveLogs, 200)
+    const carTimer = setInterval(moveCars, 130)
+    const crocTimer = setInterval(moveCrocs, 400)
     collision()
   }
 
@@ -130,7 +153,16 @@ function init() {
   function addRipple() {
     for (let i = 0; i < rippleArray.length; i++) {
       cells[rippleArray[i]].classList.add(rippleClass)
-      //remove river
+    }
+  }
+  function addTree1() {
+    for (let i = 0; i < tree1Array.length; i++) {
+      cells[tree1Array[i]].classList.add(tree1Class)
+    }
+  }
+  function addTree2() {
+    for (let i = 0; i < tree2Array.length; i++) {
+      cells[tree2Array[i]].classList.add(tree2Class)
     }
   }
 
@@ -153,9 +185,9 @@ function init() {
     } else {
       console.log('not right keys')
     }
+    movements.play()
     addFrog(frogCurrentPosition)
   }
-
 
   //FUNCTIONS FOR OBSTACLE MOVEMENTS
   function moveLogs() {
@@ -198,6 +230,7 @@ function init() {
   //(to make collision code cleaner)
   function collisionResponse() {
     removeFrog(frogCurrentPosition)
+    lostLife.play()
     frogCurrentPosition = frogStartPosition
     lives.innerText = (lives.innerText) - 1
     addFrog(frogStartPosition)
@@ -215,16 +248,16 @@ function init() {
       console.log('ran over')
     } else if (cells[frogCurrentPosition].classList.contains('croc')) {
       collisionResponse()
-      //add audio
+      crocBite.play()
       console.log('youve been eaten')
     } else if (cells[frogCurrentPosition].classList.contains('log')) {
       collisionResponse()
-      //add audio
+      logHit.play()
       console.log('battered')
     } else if (cells[frogCurrentPosition].classList.contains('river')) {
       collisionResponse()
-      //add audio
-      console.log('drowned') 
+      drown.play()
+      console.log('drowned')
     } else {
       win()
     }
@@ -239,7 +272,7 @@ function init() {
   function checkGameOver() {
     if (lives.innerText === '0') {
       gameOverPopUp.classList.add('active')
-      console.log('game over')
+      gamesOver.play()
     } else {
       console.log()
     }
@@ -248,15 +281,11 @@ function init() {
   function win() {
     if (cells[frogCurrentPosition].classList.contains('home')) {
       winPopUp.classList.add('active')
-      //pop up you win
+      winner.play()
     } else {
       console.log()
     }
   }
-
-  // crash css -> gif for each colliion 
-  // eventlistener on keyboard to start obstacle movements once space is clicked
-  // if frog position === .home position then alert 'you win'
 
   //GAME STARTS ON BUTTON CLICK
   startButton.addEventListener('click', startGame)

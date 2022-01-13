@@ -57,6 +57,17 @@ pointer-events: auto;
   align-items: center;
 }
 
+.popup-title-container {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+button {
+  font-family: 'Roboto Mono', monospace;
+  font-weight: bold;
+}
+
 #start-button{
   width: 200px;
   height: 65px;
@@ -84,7 +95,16 @@ pointer-events: auto;
   color: #DEE63B;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: #230202;
-  font-size: 40px;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+#popup-logo{
+  height: 200px;
+  width: 200px;
+  margin-left: 10px;
+  margin-right: 0;
+
 }
 
 p {
@@ -96,11 +116,13 @@ p {
   text-align: center;
   font-weight: bold;
 }
+
 #highlight{
   color: #DEE63B;
   -webkit-text-stroke-width: 0.15px;
   -webkit-text-stroke-color: #230202;
 }
+
 .keys {
   height: 70px;
   width: 100px;
@@ -129,7 +151,7 @@ pointer-events: auto;
 }
 
 .gameover-popup {
-  background-color: rgba(75, 31, 31, 0.886);
+  background-color: rgba(75, 31, 31, 0.836);
   height: 700px;
   width: 1150px;
   display: flex;
@@ -150,17 +172,22 @@ pointer-events: auto;
   align-content: center;
   justify-content: center;
   align-items: center;
+  line-height: 50px;;
 }
+
 #gameover-popup-title {
   color: #a50000;
-  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: #230202;
-  font-size: 40px;
+  font-size: 70px;
+  font-weight: bold;
 }
+
 #gameover-info{
   text-align: center;
   font-weight: bold;
   color: white;
+  font-size: 30px;
 }
 
 .win-popup-container{
@@ -214,13 +241,13 @@ pointer-events: auto;
   -webkit-text-stroke-color: #230202;
   font-size: 70px;
 }
+
 #win-info{
   text-align: center;
   font-weight: bold;
   color: white;
   font-size: 20px;
 }
-
 
 .lives-counter{
   display: flex;
@@ -241,8 +268,6 @@ pointer-events: auto;
   -webkit-text-stroke-color: #230202;
   font-size: 60px;
 }
-
-
 
 .grid-wrapper {
   height: 100%;
@@ -267,7 +292,6 @@ pointer-events: auto;
 }
 
 .grid div {
-  border: 1px solid rgb(0, 0, 0);
   flex-grow: 1;
   height: 10%;
   width: 10%;
@@ -310,18 +334,20 @@ pointer-events: auto;
 }
 
 .grid div.river {
-  background-color:#92b6e9;
+  /* background-color:#92b6e9; */
+  /* background-color: #98bbee; */
+  background-color: #91B5E9;
 }
 
 .grid div.ripples {
     background-image: url('images/ripples.gif');
-    background-size: 160%; 
+    background-size: 200%; 
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .grid div.obstacleRiver {
-  background-color: lightblue;
+  background-color: rgb(167, 116, 100);
 }
 
 .grid div.lily {
@@ -331,9 +357,23 @@ pointer-events: auto;
   background-position: center;
 }
 
+.grid div.tree1{
+  background-image: url('images/tree1.png');
+  background-size: 100%; 
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.grid div.tree2{
+  background-image: url('images/tree2.png');
+  background-size: 100%; 
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .grid div.frog {
   background-image: url('images/frog.png');
-  background-size: 140%; 
+  background-size: 130%; 
   background-repeat: no-repeat;
   background-position: center;
 }
