@@ -245,19 +245,15 @@ function init() {
     } else if (cells[frogCurrentPosition].classList.contains('car')) {
       collisionResponse()
       carHorn.play()
-      console.log('ran over')
     } else if (cells[frogCurrentPosition].classList.contains('croc')) {
       collisionResponse()
       crocBite.play()
-      console.log('youve been eaten')
     } else if (cells[frogCurrentPosition].classList.contains('log')) {
       collisionResponse()
       logHit.play()
-      console.log('battered')
     } else if (cells[frogCurrentPosition].classList.contains('river')) {
       collisionResponse()
       drown.play()
-      console.log('drowned')
     } else {
       win()
     }
